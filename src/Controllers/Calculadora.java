@@ -50,16 +50,16 @@ public class Calculadora implements IOperadores, ITipoOperacion {
 
 		switch (tipoOperacion.getTipoOperacion().toUpperCase()) {
 
-		case "SUMA":
+		case "+":
 			resultado = Suma();
 			break;
-		case "RESTA":
+		case "-":
 			resultado = Resta();
 			break;
-		case "DIVISION":
+		case "/":
 			resultado = Division();
 			break;
-		case "MULTIPLICACION":
+		case "*":
 			resultado = Multiplicacion();
 			break;
 		default:

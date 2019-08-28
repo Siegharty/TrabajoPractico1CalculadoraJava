@@ -2,6 +2,8 @@ package View;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.regex.Pattern;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import Controllers.Calculadora;
@@ -43,7 +45,7 @@ public class PantallaCalculadora {
 	}
 
 	private void ObtenerDatosDePantalla(String cadena, String signo) {
-		String[] arrayNuevo = cadena.split(signo);
+		String[] arrayNuevo = cadena.split(Pattern.quote(signo));
 		this.primerNumero= arrayNuevo[0];
 		this.segundoNumero = arrayNuevo[1];	
 		this.signo = signo;
