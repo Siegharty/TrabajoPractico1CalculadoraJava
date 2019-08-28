@@ -1,0 +1,79 @@
+package View;
+
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import Controllers.Calculadora;
+
+public class PantallaCalculadora {
+
+	private JLabel PantallaCalculadora = new JLabel("");
+	private String primerNumero = "";
+	private String segundoNumero = "";
+	private String signo = "";
+	Calculadora calc = new Calculadora(0, 0, "");
+
+	public PantallaCalculadora(JFrame frame) {
+		GenerarPantalla(frame);
+	}
+
+	private void GenerarPantalla(JFrame frame) {
+		PantallaCalculadora.setBounds(15, -95, 214, 261);
+		PantallaCalculadora.setBackground(Color.WHITE);
+		PantallaCalculadora.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 30));
+		PantallaCalculadora.setForeground(Color.BLACK);
+		frame.getContentPane().add(PantallaCalculadora);
+	}
+
+	public void EnviarDatosDePantalla() {
+		ObtenerDatosDePantalla(PantallaCalculadora.getText(),ObtenerSignoDeTexto(PantallaCalculadora.getText()));
+		String[] resultado = new String[3];
+		resultado[0] = this.primerNumero;
+		resultado[1] = this.segundoNumero;
+		resultado[2] = this.signo;
+
+		calc.AlmacenarDatos(resultado);
+	}
+
+	public String CalcularDatos() {
+		EnviarDatosDePantalla();
+		ActualizarPantalla("C2");
+		return calc.DevolverOperacion();
+	}
+
+	private void ObtenerDatosDePantalla(String cadena, String signo) {
+		String[] arrayNuevo = cadena.split(signo);
+		this.primerNumero= arrayNuevo[0];
+		this.segundoNumero = arrayNuevo[1];	
+		this.signo = signo;
+	}
+	
+	private String ObtenerSignoDeTexto(String cadena) {
+		String nuevo = "";
+		char[] cadena_div = cadena.toCharArray();
+		for(int i = 0; i< cadena_div.length; i++) {
+			if(cadena_div[i] == '+' || cadena_div[i] == '-' || cadena_div[i] == '/'  || cadena_div[i] == '*' ) {
+				nuevo += cadena_div[i];
+			}
+		}
+		return nuevo;
+	}
+
+	public void ActualizarPantalla(String s) {
+		switch (s) {
+		case "C":
+			// limpiar a,b,tipoOperacion
+			PantallaCalculadora.setText("");
+			calc.LimpiarDatos();
+			break;
+		case "C2":
+			// limpiar a,b,tipoOperacion
+			PantallaCalculadora.setText("");
+			break;
+		default:
+			PantallaCalculadora.setText(PantallaCalculadora.getText() + s);
+			break;
+		}
+	}
+}

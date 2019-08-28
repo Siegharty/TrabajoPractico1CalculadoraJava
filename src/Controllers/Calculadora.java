@@ -1,0 +1,83 @@
+package Controllers;
+
+import java.awt.event.ActionListener;
+
+import Models.A;
+import Models.B;
+import Models.IOperadores;
+import Models.ITipoOperacion;
+import Models.TipoOperacion;
+import View.Botones;
+import View.PantallaCalculadora;
+
+public class Calculadora implements IOperadores, ITipoOperacion {
+
+	private A a;
+	private B b;
+	private TipoOperacion tipoOperacion;
+	private Botones botones;
+	private PantallaCalculadora pantalla;
+
+	public Calculadora(double a, double b, String tipo) {
+		this.a = new A(a);
+		this.b = new B(b);
+		this.tipoOperacion = new TipoOperacion(tipo);
+	}
+
+	@Override
+	public double Suma() {
+		return a.getA() + b.getB();
+	}
+
+	@Override
+	public double Resta() {
+		return a.getA() - b.getB();
+	}
+
+	@Override
+	public double Division() {
+		return a.getA() / b.getB();
+	}
+
+	@Override
+	public double Multiplicacion() {
+		return a.getA() * b.getB();
+	}
+
+	@Override
+	public String DevolverOperacion() {
+		double resultado = 0;
+
+		switch (tipoOperacion.getTipoOperacion().toUpperCase()) {
+
+		case "SUMA":
+			resultado = Suma();
+			break;
+		case "RESTA":
+			resultado = Resta();
+			break;
+		case "DIVISION":
+			resultado = Division();
+			break;
+		case "MULTIPLICACION":
+			resultado = Multiplicacion();
+			break;
+		default:
+			resultado = 0;
+			break;
+		}
+		return Double.toString(resultado);
+	}
+
+	public void AlmacenarDatos(String[] datos) {
+		this.a.setA((Double.parseDouble(datos[0])));
+		this.b.setB((Double.parseDouble(datos[1])));
+		this.tipoOperacion.setTipoOperacion(datos[2]);
+	}
+
+	public void LimpiarDatos() {
+		this.a.setA(0);
+		this.b.setB(0);
+		this.tipoOperacion.setTipoOperacion("");
+	}
+}
