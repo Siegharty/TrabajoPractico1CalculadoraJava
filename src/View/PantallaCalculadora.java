@@ -29,8 +29,9 @@ public class PantallaCalculadora {
 	}
 
 	public void EnviarDatosDePantalla() {
-		ObtenerDatosDePantalla(PantallaCalculadora.getText(),ObtenerSignoDeTexto(PantallaCalculadora.getText()));
 		String[] resultado = new String[3];
+		ObtenerDatosDePantalla(PantallaCalculadora.getText(), ObtenerSignoDeTexto(PantallaCalculadora.getText()));
+
 		resultado[0] = this.primerNumero;
 		resultado[1] = this.segundoNumero;
 		resultado[2] = this.signo;
@@ -46,20 +47,30 @@ public class PantallaCalculadora {
 
 	private void ObtenerDatosDePantalla(String cadena, String signo) {
 		String[] arrayNuevo = cadena.split(Pattern.quote(signo));
-		this.primerNumero= arrayNuevo[0];
-		this.segundoNumero = arrayNuevo[1];	
+		this.primerNumero = arrayNuevo[0];
+		this.segundoNumero = arrayNuevo[1];
 		this.signo = signo;
 	}
-	
+
 	private String ObtenerSignoDeTexto(String cadena) {
 		String nuevo = "";
 		char[] cadena_div = cadena.toCharArray();
-		for(int i = 0; i< cadena_div.length; i++) {
-			if(cadena_div[i] == '+' || cadena_div[i] == '-' || cadena_div[i] == '/'  || cadena_div[i] == '*' ) {
+		for (int i = 0; i < cadena_div.length; i++) {
+			if (cadena_div[i] == '+' || cadena_div[i] == '-' || cadena_div[i] == '/' || cadena_div[i] == '*') {
 				nuevo += cadena_div[i];
 			}
 		}
 		return nuevo;
+	}
+
+	public boolean existeSignoEnPantalla() {
+		char[] cadena_div = PantallaCalculadora.getText().toCharArray();
+		for (int i = 0; i < cadena_div.length; i++) {
+			if (cadena_div[i] == '+' || cadena_div[i] == '-' || cadena_div[i] == '/' || cadena_div[i] == '*') {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void ActualizarPantalla(String s) {

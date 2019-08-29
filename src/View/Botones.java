@@ -26,7 +26,12 @@ public class Botones {
 	private void AlmacenarSigno(JButton boton) {
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pantalla.ActualizarPantalla(boton.getText());
+				if (pantalla.existeSignoEnPantalla()) {
+					pantalla.ActualizarPantalla(pantalla.CalcularDatos());
+					pantalla.ActualizarPantalla(boton.getText());
+				} else {
+					pantalla.ActualizarPantalla(boton.getText());
+				}
 			}
 		});
 	}

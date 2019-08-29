@@ -1,22 +1,16 @@
 package Controllers;
 
-import java.awt.event.ActionListener;
-
 import Models.A;
 import Models.B;
 import Models.IOperadores;
 import Models.ITipoOperacion;
 import Models.TipoOperacion;
-import View.Botones;
-import View.PantallaCalculadora;
 
 public class Calculadora implements IOperadores, ITipoOperacion {
 
 	private A a;
 	private B b;
 	private TipoOperacion tipoOperacion;
-	private Botones botones;
-	private PantallaCalculadora pantalla;
 
 	public Calculadora(double a, double b, String tipo) {
 		this.a = new A(a);
