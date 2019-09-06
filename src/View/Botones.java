@@ -118,7 +118,7 @@ public class Botones {
 
 		JButton BotonComa = new JButton(".");
 		BotonComa.setBounds(167, 213, 42, 37);
-		// AlmacenarNumero(BotonComa);
+		AlmacenarNumero(BotonComa);
 		frame.getContentPane().add(BotonComa);
 
 		JButton BotonIgual = new JButton("=");
