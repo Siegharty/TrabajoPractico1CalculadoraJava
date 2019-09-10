@@ -32,7 +32,7 @@ public class PantallaCalculadora {
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 		PantallaCalculadora.setBorder(border);
 		frame.getContentPane().add(PantallaCalculadora);
-		
+
 		PantallaCalculadora2.setBounds(15, -115, 214, 261);
 		PantallaCalculadora2.setBackground(Color.WHITE);
 		PantallaCalculadora2.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 10));
@@ -42,7 +42,7 @@ public class PantallaCalculadora {
 
 	public void EnviarDatosDePantalla() {
 		String[] resultado = new String[3];
-		ObtenerDatosDePantalla(PantallaCalculadora.getText(), ObtenerSignoDeTexto(PantallaCalculadora.getText()));
+		ObtenerDatosDePantalla(PantallaCalculadora.getText(), calc.ObtenerTipoOperacion());
 
 		resultado[0] = this.primerNumero;
 		resultado[1] = this.segundoNumero;
@@ -72,34 +72,55 @@ public class PantallaCalculadora {
 				nuevo += cadena_div[i];
 			}
 		}
-		return nuevo;
+		return nuevo.substring(nuevo.length()-1);
 	}
 
 	public boolean existeSignoEnPantalla() {
 		char[] cadena_div = PantallaCalculadora.getText().toCharArray();
+		// Verificar que no tome el signo negativo de un numero
 		for (int i = 0; i < cadena_div.length; i++) {
-			if (cadena_div[i] == '+' || cadena_div[i] == '-' || cadena_div[i] == '/' || cadena_div[i] == '*') {
+			if (cadena_div[i] == '+' || (cadena_div[i] == '-' && !Character.isDigit(cadena_div[i + 1]))
+					|| cadena_div[i] == '/' || cadena_div[i] == '*') {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	private String NegarUltimoNumero() {
+		char[] cadena_div = PantallaCalculadora.getText().toCharArray();
+		String nuevo = "";
+		for (int i = 0; i < cadena_div.length; i++) {
+			if (Character.isDigit(cadena_div[i])) {
+				nuevo += cadena_div[i];
+			}
+		}
+		return "-" + nuevo.substring(nuevo.length() - 1);
+	}
+
 	public void ActualizarPantalla(String s) {
 		switch (s) {
 		case "C":
-			// limpiar a,b,tipoOperacion
 			PantallaCalculadora.setText("");
+			PantallaCalculadora2.setText("");
 			calc.LimpiarDatos();
 			break;
 		case "C2":
-			// limpiar a,b,tipoOperacion
 			PantallaCalculadora.setText("");
+			PantallaCalculadora2.setText("");
+			break;
+		case "±":
+			PantallaCalculadora.setText(NegarUltimoNumero());
+			PantallaCalculadora2.setText(NegarUltimoNumero());
 			break;
 		default:
 			PantallaCalculadora.setText(PantallaCalculadora.getText() + s);
 			PantallaCalculadora2.setText(PantallaCalculadora2.getText() + s);
 			break;
 		}
+	}
+
+	public void EnviarTipoOperacion(String dato) {
+		calc.AlmacenarTipoOperacion(dato);
 	}
 }

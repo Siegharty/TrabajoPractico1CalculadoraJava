@@ -74,4 +74,12 @@ public class Calculadora implements IOperadores, ITipoOperacion {
 		this.b.setB(0);
 		this.tipoOperacion.setTipoOperacion("");
 	}
+	
+	public void AlmacenarTipoOperacion(String dato) {
+		this.tipoOperacion.setTipoOperacion(dato);
+	}
+	
+	public String ObtenerTipoOperacion() {
+		return this.tipoOperacion.getTipoOperacion();
+	}
 }

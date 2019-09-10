@@ -26,6 +26,8 @@ public class Botones {
 	private void AlmacenarSigno(JButton boton) {
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Almacenar el signo directamente al controlador
+				pantalla.EnviarTipoOperacion(boton.getText());
 				if (pantalla.existeSignoEnPantalla()) {
 					pantalla.ActualizarPantalla(pantalla.CalcularDatos());
 					pantalla.ActualizarPantalla(boton.getText());
@@ -40,6 +42,14 @@ public class Botones {
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pantalla.ActualizarPantalla(pantalla.CalcularDatos());
+			}
+		});
+	}
+	
+	private void NegarNumero(JButton boton) {
+		boton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pantalla.ActualizarPantalla(boton.getText());
 			}
 		});
 	}
@@ -130,7 +140,11 @@ public class Botones {
 		BotonBorrar.setBounds(220, 213, 42, 37);
 		AlmacenarSigno(BotonBorrar);
 		frame.getContentPane().add(BotonBorrar);
+		
+		JButton BotonMasMenos = new JButton("±");
+		BotonMasMenos.setBounds(220, 165,42, 37);
+		NegarNumero(BotonMasMenos);
+		frame.getContentPane().add(BotonMasMenos);
 
 	}
-
 }
